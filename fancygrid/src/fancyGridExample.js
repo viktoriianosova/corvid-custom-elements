@@ -10,37 +10,39 @@ class FancyGridExample extends HTMLElement {
 
 		this.innerHTML = `<div id="container"></div>`;
 
-		new FancyGrid({
-			renderTo: 'container',
-			width: 550,
-			height: 500,
-			data: elData,
-			defaults: {
-				resizable: true,
-				draggable: true,
-			},
-			columns: [
-				{
-					index: 'name',
-					title: 'Name',
+		document.addEventListener('DOMContentLoaded', function() {
+			new Fancy.Grid({
+				renderTo: 'container',
+				width: 550,
+				height: 500,
+				data: elData,
+				defaults: {
+					resizable: true,
+					draggable: true,
 				},
-				{
-					index: 'surname',
-					title: 'SurName',
-				},
-				{
-					index: 'country',
-					title: 'Country',
-				},
-				{
-					index: 'position',
-					title: 'Position',
-				},
-				{
-					index: 'email',
-					title: 'Email',
-				},
-			],
+				columns: [
+					{
+						index: 'name',
+						title: 'Name',
+					},
+					{
+						index: 'surname',
+						title: 'SurName',
+					},
+					{
+						index: 'country',
+						title: 'Country',
+					},
+					{
+						index: 'position',
+						title: 'Position',
+					},
+					{
+						index: 'email',
+						title: 'Email',
+					},
+				],
+			});
 		});
 	}
 
