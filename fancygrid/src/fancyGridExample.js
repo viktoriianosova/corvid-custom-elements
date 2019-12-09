@@ -6,7 +6,7 @@ class FancyGridExample extends HTMLElement {
 	}
 
 	render() {
-		// const elData = JSON.parse(this.getAttribute('elementData'));
+		const elData = JSON.parse(this.getAttribute('elementData'));
 
 		this.innerHTML = `<div id="container"></div>`;
 
@@ -15,7 +15,7 @@ class FancyGridExample extends HTMLElement {
 				renderTo: 'container',
 				width: 550,
 				height: 500,
-				data: data,
+				data: elData,
 				defaults: {
 					resizable: true,
 					draggable: true,
