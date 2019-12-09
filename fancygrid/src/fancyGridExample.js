@@ -1,4 +1,4 @@
-import FancyGrid from 'fancygrid';
+import Fancy from 'fancygrid';
 
 class FancyGridExample extends HTMLElement {
 	constructor() {
@@ -10,7 +10,7 @@ class FancyGridExample extends HTMLElement {
 
 		this.innerHTML = `<div id="container"></div>`;
 
-		new FancyGrid({
+		new Fancy.Grid({
 			renderTo: 'container',
 			width: 500,
 			height: 400,
