@@ -12,15 +12,10 @@ class RoughVizChart extends HTMLElement {
 		new roughViz.Donut({
 			element: '#vis1',
 			data: elData.data,
-			// data: {
-			// 	labels: ['North', 'South', 'East', 'West'],
-			// 	values: [10, 5, 8, 3],
-			// },
 			title: 'Regions',
 			width: window.innerWidth / 4,
 			roughness: 8,
 			colors: elData.colors,
-			// colors: ['red', 'orange', 'blue', 'skyblue'],
 			stroke: 'black',
 			strokeWidth: 3,
 			fillStyle: 'cross-hatch',
