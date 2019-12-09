@@ -6,7 +6,7 @@ class CustomHtmlComponent extends HTMLElement {
 	render() {
 		const componentCode = JSON.parse(this.getAttribute('componentCode'));
 
-		this.innerHTML = `<div id="container" style="height:100vh; width: 100%"><style>${componentCode.cssCode}</style>${componentCode.htmlCode}</div>`;
+		this.innerHTML = `<div id="container" style="height:inherit; width: 100%"><style>${componentCode.cssCode}</style>${componentCode.htmlCode}</div>`;
 	}
 
 	connectedCallback() {
