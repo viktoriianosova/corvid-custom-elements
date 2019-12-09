@@ -6,40 +6,40 @@ class FancyGridExample extends HTMLElement {
 	}
 
 	render() {
-		const elData = JSON.parse(this.getAttribute('elementData'));
+		// const elData = JSON.parse(this.getAttribute('elementData'));
 
 		this.innerHTML = `<div id="container"></div>`;
 
 		document.addEventListener('DOMContentLoaded', function() {
-			Fancy.Grid({
+			new FancyGrid({
 				renderTo: 'container',
-				width: 500,
-				height: 400,
-				data: elData,
+				width: 550,
+				height: 500,
+				data: data,
+				defaults: {
+					resizable: true,
+					draggable: true,
+				},
 				columns: [
-					{
-						index: 'company',
-						title: 'Company',
-						type: 'string',
-						width: 100,
-					},
 					{
 						index: 'name',
 						title: 'Name',
-						type: 'string',
-						width: 100,
 					},
 					{
 						index: 'surname',
-						title: 'Sur Name',
-						type: 'string',
-						width: 100,
+						title: 'SurName',
 					},
 					{
-						index: 'age',
-						title: 'Age',
-						type: 'number',
-						width: 100,
+						index: 'country',
+						title: 'Country',
+					},
+					{
+						index: 'position',
+						title: 'Position',
+					},
+					{
+						index: 'email',
+						title: 'Email',
 					},
 				],
 			});
