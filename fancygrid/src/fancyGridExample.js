@@ -10,37 +10,39 @@ class FancyGridExample extends HTMLElement {
 
 		this.innerHTML = `<div id="container"></div>`;
 
-		Fancy.Grid({
-			renderTo: 'container',
-			width: 500,
-			height: 400,
-			data: elData,
-			columns: [
-				{
-					index: 'company',
-					title: 'Company',
-					type: 'string',
-					width: 100,
-				},
-				{
-					index: 'name',
-					title: 'Name',
-					type: 'string',
-					width: 100,
-				},
-				{
-					index: 'surname',
-					title: 'Sur Name',
-					type: 'string',
-					width: 100,
-				},
-				{
-					index: 'age',
-					title: 'Age',
-					type: 'number',
-					width: 100,
-				},
-			],
+		document.addEventListener('DOMContentLoaded', function() {
+			Fancy.Grid({
+				renderTo: 'container',
+				width: 500,
+				height: 400,
+				data: elData,
+				columns: [
+					{
+						index: 'company',
+						title: 'Company',
+						type: 'string',
+						width: 100,
+					},
+					{
+						index: 'name',
+						title: 'Name',
+						type: 'string',
+						width: 100,
+					},
+					{
+						index: 'surname',
+						title: 'Sur Name',
+						type: 'string',
+						width: 100,
+					},
+					{
+						index: 'age',
+						title: 'Age',
+						type: 'number',
+						width: 100,
+					},
+				],
+			});
 		});
 	}
 
