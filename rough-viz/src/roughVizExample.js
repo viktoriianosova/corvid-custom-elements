@@ -16,7 +16,7 @@ class RoughVizChart extends HTMLElement {
 				values: [10, 5, 8, 3],
 			},
 			title: 'Regions',
-			width: window.innerWidth,
+			width: window.innerWidth / 4,
 			roughness: 8,
 			colors: ['red', 'orange', 'blue', 'skyblue'],
 			stroke: 'black',
