@@ -6,19 +6,21 @@ class RoughVizChart extends HTMLElement {
 	}
 
 	render() {
-		// const elData = JSON.parse(this.getAttribute('elementData'));
+		const elData = JSON.parse(this.getAttribute('elementData'));
 		this.innerHTML = `<div id="vis1"></div>`;
 
 		new roughViz.Donut({
 			element: '#vis1',
-			data: {
-				labels: ['North', 'South', 'East', 'West'],
-				values: [10, 5, 8, 3],
-			},
+			data: elData.data,
+			// data: {
+			// 	labels: ['North', 'South', 'East', 'West'],
+			// 	values: [10, 5, 8, 3],
+			// },
 			title: 'Regions',
 			width: window.innerWidth / 4,
 			roughness: 8,
-			colors: ['red', 'orange', 'blue', 'skyblue'],
+			colors: elData.colors,
+			// colors: ['red', 'orange', 'blue', 'skyblue'],
 			stroke: 'black',
 			strokeWidth: 3,
 			fillStyle: 'cross-hatch',
@@ -30,13 +32,13 @@ class RoughVizChart extends HTMLElement {
 		this.render();
 	}
 
-	// static get observedAttributes() {
-	// 	return ['elementData'];
-	// }
+	static get observedAttributes() {
+		return ['elementData'];
+	}
 
-	// attributeChangedCallback(name, oldValue, newValue) {
-	// 	this.render();
-	// }
+	attributeChangedCallback(name, oldValue, newValue) {
+		this.render();
+	}
 }
 
 window.customElements.define('rough-viz-chart', RoughVizChart);
