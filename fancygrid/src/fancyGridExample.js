@@ -10,7 +10,7 @@ class FancyGridExample extends HTMLElement {
 
 		this.innerHTML = `<div id="container"></div>`;
 
-		new Fancy.Grid({
+		Fancy.Grid({
 			renderTo: 'container',
 			width: 500,
 			height: 400,
