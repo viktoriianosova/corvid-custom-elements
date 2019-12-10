@@ -4,10 +4,9 @@ class CustomHtmlComponent extends HTMLElement {
 	}
 
 	render() {
-		const componentCode = JSON.parse(this.getAttribute('componentCode'));
+		console.log('render!');
 
-		// const htmlCode = componentCode.htmlCode.replace('\n', '');
-		// const cssCode = componentCode.cssCode.replace('\n', '');
+		const componentCode = JSON.parse(this.getAttribute('componentCode'));
 
 		this.innerHTML = `<div id="container" style="height:inherit; width: 100%"><style>${componentCode.cssCode}</style>${componentCode.htmlCode}</div>`;
 	}
@@ -21,6 +20,8 @@ class CustomHtmlComponent extends HTMLElement {
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
+		console.log('callback changed');
+
 		this.render();
 	}
 }
