@@ -51,6 +51,8 @@ class ImageTextDropdown extends HTMLElement {
 			padding: 12px 16px;
 			text-decoration: none;
 			border-top: 1px solid #ddd;
+			display: flex;
+			align-items: center;
 		  }
 		  
 		   .dropdown-option:hover {
@@ -58,13 +60,15 @@ class ImageTextDropdown extends HTMLElement {
 			}
 			
 			.dropdown-option img {
+				width: 20px;
+				height: 20px;
 				margin-right: 20px;
 			  }
 		</style>
 		<div id="wrapper">
 			<div id="myDropdown" class="dropdown-content">
 				<div id="selectButton">Select</div>
-				<div id="options">
+				<div id="options" style="display: none">
 				${options}
 				</div>
 			</div>
@@ -80,8 +84,6 @@ class ImageTextDropdown extends HTMLElement {
 
 	_hideShowOptions() {
 		const optionsContainer = this.shadowRoot.getElementById('options');
-
-		console.log(optionsContainer.style.display);
 
 		if (!optionsContainer.style.display) {
 			optionsContainer.style.display = 'none';
