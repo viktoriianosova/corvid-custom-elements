@@ -5,19 +5,13 @@ class ColorPicker extends HTMLElement {
 		this.attachShadow({ mode: 'open' });
 	}
 
-	render() {
-		const data = this.getAttribute('colors');
-		const dataParsed = JSON.parse(data);
-
-		const colorIcons = dataParsed
+	render(colors) {
+		const colorIcons = colors
 			.map(
 				color =>
 					`<div class="color-picker-selection" style="background-color: ${color}"></div>`,
 			)
 			.join('');
-		console.log(colorIcons);
-
-		const test = '#333745';
 
 		this.shadowRoot.innerHTML = `
 		<style>
@@ -59,29 +53,106 @@ class ColorPicker extends HTMLElement {
 				margin: 5px 0px 0px 5px;
 				float: left;
 			}
+			.color-picker-selection-container input {
+				margin-top: 8px;
+				border-radius: 0px 0px 0px 0px;
+				border-width: 0px 0px 1px 0px;
+				outline: none;
+				color: #A9A9A9;
+			}
 		</style>
 
-		<div class="color-picker-header" style="background-color: ${test}">
-			<p>${test}</p>
+		<div class="color-picker-header" style="background-color: ${colors[0]}">
+			<p>${colors[0]}</p>
 		  </div>
 		<div class="color-picker-footer">
 			<div class="color-picker-selection-container">
 			${colorIcons}
+			<input key="hexInput" placeholder="Hex value"/>
 			</div>
 		</div>	 
+		<p><a target="blank" href="https://github.com/marko-js-samples/marko-color-picker/tree/master/components/color-picker">Source</a></p<a>
 		`;
 	}
 
-	connectedCallback() {
-		this.render();
+	parseColor(color) {
+		var arr = [];
+		color.replace(/[\d+\.]+/g, function(v) {
+			arr.push(parseFloat(v));
+		});
+		return `#${arr
+			.slice(0, 3)
+			.map(this.toHex)
+			.join('')}`;
+	}
 
-		// const input = this.shadowRoot.getElementById('myInput');
-		// input.addEventListener('keyup', e => this._filterValues(e.target.value));
+	toHex(int) {
+		var hex = int.toString(16);
+		return hex.length == 1 ? '0' + hex : hex;
+	}
+
+	isValidHexValue(hexValue) {
+		return /^#[0-9A-F]{6}$/i.test(hexValue);
+	}
+
+	handleHexInput(hexInput, fallbackColor) {
+		if (!hexInput.startsWith('#')) {
+			hexInput = '#' + hexInput;
+		}
+
+		if (!this.isValidHexValue(hexInput)) {
+			hexInput = fallbackColor;
+		}
+
+		this.onIconClick(hexInput);
+	}
+
+	onIconClick(color) {
+		const header = this.shadowRoot.querySelector('.color-picker-header');
+		header.style.backgroundColor = color;
+
+		const paragraph = header.querySelector('p');
+
+		if (!this.isValidHexValue(color)) {
+			const hex = this.parseColor(color).toUpperCase();
+			paragraph.textContent = hex;
+		} else {
+			paragraph.textContent = color;
+		}
+	}
+
+	connectedCallback() {
+		const colors = JSON.parse(this.getAttribute('colors'));
+		this.render(colors);
+
+		// Events
+		const colorIcons = this.shadowRoot.querySelectorAll(
+			'.color-picker-selection',
+		);
+		colorIcons.forEach(icon => {
+			icon.addEventListener('click', () =>
+				this.onIconClick(icon.style.backgroundColor),
+			);
+		});
+
+		const input = this.shadowRoot.querySelector('input');
+		const fallbackValue = colors[0];
+		input.addEventListener('input', e =>
+			this.handleHexInput(e.target.value, fallbackValue),
+		);
+		console.log(input);
 	}
 
 	disconnectedCallback() {
-		// const input = document.getElementById('myInput');
-		// input.removeEventListener('keyup', e => this._filterValues(e.target.value));
+		const colorIcons = this.shadowRoot.querySelectorAll(
+			'.color-picker-selection',
+		);
+
+		colorIcons.forEach(icon => {
+			icon.removeEventListener('click', () =>
+				this.onIconClick(icon.style.backgroundColor),
+			);
+		});
 	}
 
 	static get observedAttributes() {
@@ -90,7 +161,8 @@ class ColorPicker extends HTMLElement {
 
 	attributeChangedCallback(name, oldValue, newValue) {
 		if (name === 'colors') {
-			this.render();
+			const newValueParsed = JSON.parse(newValue);
+			this.render(newValueParsed);
 		}
 	}
 }
