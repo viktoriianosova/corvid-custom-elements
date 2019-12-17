@@ -30,8 +30,13 @@ class ImageTextDropdown extends HTMLElement {
 			box-sizing: border-box;
 			font-size: 16px;
 			padding: 12px 16px;
-			border: none;
+			border: 2px solid lightgrey;
 			background-color: #ffffff;
+		  }
+
+		  #selectButton:hover {
+			border: 2px solid #0080ff;
+			box-shadow: blur;
 		  }
 		  
 		  .dropdown-content {
@@ -45,7 +50,12 @@ class ImageTextDropdown extends HTMLElement {
 				max-height: 250px;
 				overflow: scroll;
 			}
-		  
+
+			.option-selected {
+				display: flex;
+				align-items: center;
+			  }
+
 		  .dropdown-option {
 			color: black;
 			padding: 12px 16px;
@@ -59,7 +69,9 @@ class ImageTextDropdown extends HTMLElement {
 			  background-color: #f1f1f1;
 			}
 			
-			.dropdown-option img {
+			.dropdown-option img,
+			.option-selected img
+			 {
 				width: 20px;
 				height: 20px;
 				margin-right: 20px;
@@ -97,6 +109,16 @@ class ImageTextDropdown extends HTMLElement {
 
 		const selectButton = this.shadowRoot.getElementById('selectButton');
 		selectButton.addEventListener('click', e => this._hideShowOptions());
+
+		const option = this.shadowRoot.querySelectorAll('.dropdown-option');
+		option.forEach(opt =>
+			opt.addEventListener('click', e => {
+				const optionHTML = e.target.innerHTML;
+				selectButton.innerHTML = `<div class="option-selected">${optionHTML}</div>`;
+
+				this._hideShowOptions();
+			}),
+		);
 	}
 
 	disconnectedCallback() {
