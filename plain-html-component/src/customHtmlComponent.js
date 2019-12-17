@@ -6,7 +6,7 @@ class CustomHtmlComponent extends HTMLElement {
 	render() {
 		console.log('render!');
 
-		const componentCode = JSON.parse(this.getAttribute('componentCode'));
+		const componentCode = JSON.parse(this.getAttribute('component-code'));
 
 		this.innerHTML = `<div id="container" style="height:inherit; width: 100%"><style>${componentCode.cssCode}</style>${componentCode.htmlCode}</div>`;
 	}
@@ -16,7 +16,7 @@ class CustomHtmlComponent extends HTMLElement {
 	}
 
 	static get observedAttributes() {
-		return ['componentCode'];
+		return ['component-code'];
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
