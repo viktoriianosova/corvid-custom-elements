@@ -11,7 +11,7 @@ class ImageTextDropdown extends HTMLElement {
 		const options = values
 			.map(option => {
 				return `<div class="dropdown-option">
-				<img src=${option.flag}/>
+				<img src=${option.flag}>
 				<span>${option.title}</span>
 				</div>`;
 			})
