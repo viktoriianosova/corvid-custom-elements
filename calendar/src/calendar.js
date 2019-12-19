@@ -1579,18 +1579,7 @@ be a descendant of the grid when it is being dragged.
 		const calendarEl = document.getElementById('calendar');
 		const calendar = new Calendar(calendarEl, {
 			plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
-			events: [
-				{
-					id: 'a',
-					title: 'my event',
-					start: '2019-12-19',
-				},
-				{
-					id: 'ab',
-					title: 'my second event',
-					start: '2019-12-17',
-				},
-			],
+			events: elData,
 		});
 
 		calendar.render();
