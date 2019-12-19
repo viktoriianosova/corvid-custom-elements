@@ -2,10 +2,10 @@ import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-import '@fullcalendar/core/main.css';
-import '@fullcalendar/daygrid/main.css';
-import '@fullcalendar/timegrid/main.css';
-import '@fullcalendar/list/main.css';
+import mainCss from '@fullcalendar/core/main.css';
+import daygridCss from '@fullcalendar/daygrid/main.css';
+import timegridCss from '@fullcalendar/timegrid/main.css';
+import listCss from '@fullcalendar/list/main.css';
 
 class CalendarComponent extends HTMLElement {
 	constructor() {
@@ -14,7 +14,14 @@ class CalendarComponent extends HTMLElement {
 
 	render() {
 		const elData = JSON.parse(this.getAttribute('events'));
-		this.innerHTML = `<div id="calendar"></div>`;
+		this.innerHTML = `
+		<style>
+		${mainCss}
+		${daygridCss}
+		${timegridCss}
+		${listCss}
+		</style>
+		<div id="calendar"></div>`;
 
 		const calendarEl = document.getElementById('calendar');
 		const calendar = new Calendar(calendarEl, {
