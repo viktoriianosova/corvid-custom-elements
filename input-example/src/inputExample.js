@@ -1,5 +1,3 @@
-import star from './star.png';
-
 class InputExample extends HTMLElement {
 	constructor() {
 		super();
@@ -57,7 +55,7 @@ class InputExample extends HTMLElement {
 		<div class="component-wrapper">
 			<div class="input-wrapper" style="background-color: white">
 				<input placeholder="Value"></input>
-				<img src=${star}></img>
+				<img src="https://image.flaticon.com/icons/png/512/0/557.png"></img>
 			</div>
 			<button style="background-color: white">Submit</button>
 		</div>`;
