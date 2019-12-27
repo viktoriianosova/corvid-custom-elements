@@ -1,13 +1,15 @@
-import downArrow from '../assets/down-arrow.png';
+import downArrow from '../assets/arrow-down-sign-to-navigate.svg';
 
 class MegaMenu extends HTMLElement {
 	constructor() {
 		super();
+
+		this.attachShadow({ mode: 'open' });
 	}
 
 	render() {
 		// const componentCode = JSON.parse(this.getAttribute('component-code'));
-		this.innerHTML = `
+		this.shadowRoot.innerHTML = `
 		<style>
 		/* General styling */
 		* {
