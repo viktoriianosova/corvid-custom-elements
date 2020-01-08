@@ -15,15 +15,15 @@ class TimelineComponent extends HTMLElement {
 		  <li>sat</li>
 		</ul>
 		<ul class="chart-bars">
-		  <li data-duration="tue½-wed" data-color="#b03532">Task</li>
-		  <li data-duration="wed-sat" data-color="#33a8a5">Task</li>
-		  <li data-duration="sun-tue" data-color="#30997a">Task</li>
-		  <li data-duration="tue½-thu" data-color="#6a478f">Task</li>
-		  <li data-duration="mon-tue½" data-color="#da6f2b">Task</li>
-		  <li data-duration="wed-wed" data-color="#3d8bb1">Task</li>
-		  <li data-duration="thu-fri½" data-color="#e03f3f">Task</li>
-		  <li data-duration="mon½-wed½" data-color="#59a627">Task</li>
-		  <li data-duration="fri-sat" data-color="#4464a1">Task</li>
+		  <li data-duration="tue½-wed" data-color="#b03532">Learn closures</li>
+		  <li data-duration="wed-sat" data-color="#33a8a5">Solve Codewars challenge</li>
+		  <li data-duration="sun-tue" data-color="#30997a">Help a colleague with the presentation</li>
+		  <li data-duration="tue½-thu" data-color="#6a478f">Final paper preparation</li>
+		  <li data-duration="mon-tue½" data-color="#da6f2b">Write an essay</li>
+		  <li data-duration="wed-wed" data-color="#3d8bb1">Call mom</li>
+		  <li data-duration="thu-fri½" data-color="#e03f3f">Read about Web Components</li>
+		  <li data-duration="mon½-wed½" data-color="#59a627">Learn React Hooks</li>
+		  <li data-duration="fri-sat" data-color="#4464a1">Register for the marathon</li>
 		</ul>
 	  </div>
 	  <footer class="page-footer">
@@ -177,9 +177,6 @@ class TimelineComponent extends HTMLElement {
 
 		window.addEventListener('load', createChart);
 		window.addEventListener('resize', createChart);
-
-		// const data = this.getAttribute('search-values');
-		// const values = JSON.parse(data);
 	}
 
 	connectedCallback() {
