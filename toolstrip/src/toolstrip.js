@@ -248,7 +248,7 @@ class Toolstrip extends HTMLElement {
                     <span class="action-name">Recent documents</span>
                     <img class="icon-small" src="https://image.flaticon.com/icons/svg/0/320.svg"/>
                 </div>
-                <div class="file-submenu submenu-child recent-docs">
+                <div class="file-submenu submenu-child" id="recent-docs">
                     <div class="file-submenu-item">
                         <span class="action-name">toolstrip.js</span>
                     </div>
@@ -269,7 +269,7 @@ class Toolstrip extends HTMLElement {
                     <span class="action-name">Export as</span>
                     <img class="icon-small" src="https://image.flaticon.com/icons/svg/0/320.svg"/>
                 </div>
-                <div class="file-submenu submenu-child export-as">
+                <div class="file-submenu submenu-child" id="export-as">
                     <div class="file-submenu-item">
                         <span class="action-name">XML</span>
                     </div>
@@ -293,6 +293,9 @@ class Toolstrip extends HTMLElement {
 
 		const buttonsAll = this.shadowRoot.querySelectorAll('.button-box');
 		const mainSubmenu = this.shadowRoot.getElementById('main-submenu');
+		const submenuParents = this.shadowRoot.querySelectorAll('.submenu-parent');
+		const recentDocsSubmenu = this.shadowRoot.getElementById('recent-docs');
+		const exportAsSubmenu = this.shadowRoot.getElementById('export-as');
 
 		buttonsAll.forEach((button, index) => {
 			button.addEventListener('click', () => {
@@ -308,6 +311,24 @@ class Toolstrip extends HTMLElement {
 					if (index === 0) {
 						mainSubmenu.style.display = 'block';
 					}
+				}
+			});
+		});
+
+		submenuParents.forEach((section, index) => {
+			section.addEventListener('mouseover', () => {
+				if (index === 0) {
+					recentDocsSubmenu.style.display = 'block';
+				} else if (index === 1) {
+					exportAsSubmenu.style.display = 'block';
+				}
+			});
+
+			section.addEventListener('mouseout', () => {
+				if (index === 0) {
+					recentDocsSubmenu.style.display = 'none';
+				} else if (index === 1) {
+					exportAsSubmenu.style.display = 'none';
 				}
 			});
 		});
