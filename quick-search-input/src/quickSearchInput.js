@@ -8,6 +8,7 @@ class QuickSearchInput extends HTMLElement {
 	render() {
 		const data = this.getAttribute('search-values');
 		const values = JSON.parse(data);
+
 		const options = values
 			.map(option => {
 				return `<div class="dropdown-option">${option}</div>`;
@@ -24,15 +25,9 @@ class QuickSearchInput extends HTMLElement {
 			border-bottom: 1px solid #ddd;
 		  }
 		  
-		  #myInput:focus 
-			  {
-			  outline: 3px solid #ddd;
-			}
-		  
-		  .dropdown {
-			position: relative;
-			display: inline-block;
-		  }
+		#myInput:focus {
+			outline: 3px solid #ddd;
+		}
 		  
 		  .dropdown-content {
 			display: block;
@@ -56,28 +51,49 @@ class QuickSearchInput extends HTMLElement {
 		</style>
 		<div id="myDropdown" class="dropdown-content">
 			<input type="text" placeholder="Search.." id="myInput">
-			${options}
+			<div id="options-wrapper" style="display: none">
+				${options}
+			</div>
 		</div>`;
 	}
 
+	_toggleDropdown(open) {
+		const wrapper = this.shadowRoot.getElementById('options-wrapper');
+		wrapper.style.display = open ? 'block' : 'none';
+	}
+
 	_filterValues(filterValue) {
+		const filterValueLower = filterValue.toLowerCase();
 		const optionDivs = this.shadowRoot.querySelectorAll('.dropdown-option');
 
 		optionDivs.forEach(div => {
-			if (div.innerHTML.includes(filterValue)) {
+			const divValue = div.innerHTML.toLowerCase();
+
+			if (
+				divValue.includes(filterValueLower) ||
+				divValue.startsWith(filterValueLower)
+			) {
 				div.style.display = 'block';
 			} else {
 				div.style.display = 'none';
 			}
 		});
-		console.log(optionDivs);
 	}
 
 	connectedCallback() {
 		this.render();
 
 		const input = this.shadowRoot.getElementById('myInput');
-		input.addEventListener('keyup', e => this._filterValues(e.target.value));
+		input.addEventListener('keydown', e => {
+			this._toggleDropdown(true);
+
+			if (e.target.value.length === 0) {
+				this._toggleDropdown(false);
+			}
+		});
+		input.addEventListener('keyup', e => {
+			this._filterValues(e.target.value);
+		});
 	}
 
 	disconnectedCallback() {
