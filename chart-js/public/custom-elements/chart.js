@@ -46,6 +46,11 @@ class ChartElem extends HTMLElement {
 			type: 'bar',
 			data: this.chartData,
 			options: {
+				legend: {
+					labels: {
+						boxWidth: 0,
+					},
+				},
 				scales: {
 					yAxes: [
 						{
